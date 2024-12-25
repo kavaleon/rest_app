@@ -52,6 +52,8 @@ class Enrollment(models.Model):
         unique_together = [['student', 'course']]
         ordering = ['student']
 
+    #push
+
 
 class Grade(models.Model):
     """ Модель оценок для каждого студента по каждому курсу """
