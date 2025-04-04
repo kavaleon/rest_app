@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <link href="{%static 'css/courses.css'%}" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div class='title'>Список курсов</div>
+        </header>
+        <nav>
+            <div><a href="{% url 'home' %}">Главная</a></div>
+            <div>{{user.username}}</div>
+            <div><a href="{% url 'course_add' %}">Добавить курс</a></div>
+            <div><a href="/logout/">Выход</a></div>
+        </nav>
+        <section>
+            <div class="schedule-container">
+                <div class="schedule-header">
+                    <div class="time">название</div>
+                    <div class="time">айди</div>
+                    <div class="time">дата начала</div>
+                    <div class="time">дата конца</div>
+                    <div class="time">описание</div>
+                </div>
+                <div class="schedule-body">
+                    {% for course in courses %}
+                        <a href="{{course.detail_url}}" class="link-div">
+                        <div class="event-cell">
+                            <div class="event">{{ course.title }} </div>
+                            <div class="event">{{ course.course_id }} </div>
+                            <div class="event">{{ course.start_data }} </div>
+                            <div class="event">{{ course.end_data }} </div>
+                            <div class="event">{{ course.description }} </div>
+                        </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

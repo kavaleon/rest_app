@@ -1,0 +1,32 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+{% if courses %}
+    <article>
+    <div style="font-size:30px;font-weight: bold;">Ваши курсы:</div>
+    <div class="schedule-container">
+        <div class="schedule-header">
+            <div class="time">название</div>
+            <div class="time">айди</div>
+            <div class="time">дата начала</div>
+            <div class="time">дата конца</div>
+            <div class="time">описание</div>
+        </div>
+        <div class="schedule-body">
+            {% for course in courses %}
+                <a href="{{course.detail_url}}" class="link-div">
+                <div class="event-cell">
+                    <div class="event">{{ course.title }} </div>
+                    <div class="event">{{ course.course_id }} </div>
+                    <div class="event">{{ course.start_data }} </div>
+                    <div class="event">{{ course.end_data }} </div>
+                    <div class="event">{{ course.description }} </div>
+                </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    </article>
+{% endif %}
+
+{% endblock %}

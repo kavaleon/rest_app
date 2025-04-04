@@ -1,0 +1,40 @@
+{% extends 'base2.html' %}
+{% load custom_filters %}
+{% block content %}
+<article>
+    <h1>Оценки за курс: {{ course.title }}</h1>
+    <h2>Месяц: {{ current_month }} {{ current_year }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Студент</th>
+                    {% for day in days_in_month %}
+                        <th>{{ day }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ student.surname }} {{ student.name }}</td>
+                        {% for day in days_in_month %}
+                            <td>
+                                {% for grade in grades_data|get_item:student.id|get_item:day %}
+                                    {{ grade }}
+                                {% endfor %}
+                                <input type="number"
+                                       name="grade_{{ student.id }}_{{ day }}_{{ forloop.counter }}"
+                                       min="0" max="10">
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit">Сохранить оценки</button>
+    </form>
+</article>
+{% endblock %}

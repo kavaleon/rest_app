@@ -1,0 +1,12 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="add_user_title">Добавление преподавателя</div>
+<form method="post" class="add_teacher" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit">
+    <input type="reset">
+</form>
+{% endblock %}

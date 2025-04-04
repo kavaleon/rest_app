@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="post" class="register"  enctype="multipart/form-data">
+    <div class="title">Регистрация</div>
+    {% csrf_token %}
+    {{form.as_p}}
+    <div class="button" id="but1"><input type="submit"></div>
+    <div class='button' id="but2"><input type="reset"></div>
+    <br><br>
+    <div class="reg_text"><a href="{% url 'login' %}">Я забыл, что уже зарегистрирован</a></div>
+</form>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base2.html" %}
+
+{% block content %}
+<article>
+    <div class="user" style="inline">
+        <div class="user-info">Название: {{course.title}}</div>
+        <div class="user-info">Номер курса: {{course.course_id}}</div>
+        <div class="user-info">Дата начала курса: {{course.start_data}}</div>
+        <div class="user-info">Дата окончания курса: {{course.end_data}}</div>
+        <div class="user-info">Описание курса: {{course.description}}</div>
+
+        {% if is_teacher %}
+            <a href="{% url 'course_edit' id=course.id %}">Редактировать курс</a>
+            <a href="{% url 'course_grades' course_id=course.id %}">Посмотреть список студентов</a>
+        {% else %}
+            <h2>Ваши оценки:</h2>
+            <ul>
+                {% for grade in grades %}
+                    <li>{{ grade.time_create|date:"Y-m-d" }}: {{ grade.grade }}</li>
+                {% empty %}
+                    <li>Нет оценок за этот курс.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</article>
+{% endblock %}

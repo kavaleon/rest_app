@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="post" id="login">
+   {% csrf_token %}
+   {% if form.non_field_errors %}
+
+     <div class="alert alert-danger">
+       {{ form.non_field_errors }}
+     </div>
+   {% endif %}
+   <div class="title">Авторизация</div>
+    <br>
+   <div class="mb-3">
+     <div class="form_label"><label for="{{form.username.id_for_label}}" class="form-label">Логин</label></div>
+     {{form.username}}
+     <div class="invalid-feedback">
+       {{ form.username.errors }}
+     </div>
+       <br>
+   </div>
+   <div class="mb-3">
+     <div class="form_label"><label for="{{form.password.id_for_label}}" class="form-label">Пароль</label></div>
+     {{form.password}}
+     <div class="invalid-feedback">
+        {{ form.password.errors }}
+     </div>
+   </div>
+    <br>
+   <button type="submit" class="btn btn-primary">Войти</button>
+    <br><br>
+    <div class="reg_text"><a href="{% url 'registration' %}">Я еще не зарегистрирован</a></div>
+
+ </form>
+{% endblock %}
