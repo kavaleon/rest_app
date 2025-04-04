@@ -1,21 +1,34 @@
-
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
-        <style>
-            h4 {display: inline;}
-        </style>
-        <title>Список пользователей</title>
+        <link href="{%static 'css/user.css'%}" rel="stylesheet">
     </head>
     <body>
-        <h1>Список пользователей</h1>
             <div class="user" style="inline">
-                <h4>{{ user.name }}</h4>
-                <h4>{{ user.surname }}</h4>
-                <h4>{{ user.age }}</h4>
-                <h4>{{ user.age2 }}</h4>
+                {% if user.image %}
+                    <div class="user-info"><img src="/media/{{user.image}}" width="500px" height="300px"></div>
+                {% endif %}
+                <br>
+                <div class="user-info">Имя: {{user.name}}</div>
+                <div class="user-info">Фамилия: {{user.surname}}</div>
+                <div class="user-info">Возраст: {{user.age}}</div>
+                <br>
+                    <div class="courses user-info">
+                        {% if courses_with_grades %}
+                            {% for course_data in courses_with_grades %}
+                                <p>Курс: {{ course_data.course }}</p>
+                                <p>Оценки по курсу:</p>
+                                {% for grade in course_data.grades %}
+                                    <p>{{ grade.grade }}      ({{ grade.date }})</p>
+                                {% endfor %}
+                                <br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                <a href="{% url 'user_edit' id=user.id %}">Редактировать пользователя</a>
+                <a href="{% url 'user_delete' id=user.id %}">Удалить пользователя</a>
+                <a href="{% url 'users' %}">Вернуться к списку пользователей</a>
             </div>
-
-
     </body>
 </html>

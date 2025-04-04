@@ -1,3 +1,103 @@
-body{
-    background: grey;
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    padding: 0px;
+    margin: 0px;
+    background: black;
+    position: relative;
+    font-family: "Abril Fatface", "Courier New", monospace;
+    overflow: hidden;
+}
+
+canvas {
+    display: block; /* Убираем отступы под canvas */
+}
+
+.home{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+}
+
+form {
+    box-shadow: 0px 0px 30px 5px green;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #198513ba;
+    border: 10px solid rgb(6 22 0 / 36%);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    align-content: center;
+    min-width: 500px;
+    min-height: 300px;
+}
+
+form.register {
+    font-size: 25px;
+    input:not(#but1) {
+        float: right;
+    }
+}
+
+.title {
+    font-size: 60px;
+}
+
+.reg_text {
+    font-size: 20px;
+}
+
+button, .button > input{
+    width: 62%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background: linear-gradient(360deg, #0e4407c2, #2833397d);
+    color: white;
+    font-size: 20px;
+    font-family: "Abril Fatface", "Courier New", monospace;
+    font-weight: bold;
+}
+
+input:not(#but1, but2) {
+    width: 60%;
+    background: #00000000;
+    height: 30px;
+    border: 3px #ffffff66 solid;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 0 1000px #eae2e28f inset !important;
+    -webkit-text-fill-color: #283339 !important;
+}
+.add_user_title {
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    width: 100%;
+    padding-top: 50px;
+}
+
+nav {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-size: 25px;
+}
+a {
+    color: white;
+    text-decoration: blink;
 }

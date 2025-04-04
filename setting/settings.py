@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,7 +30,23 @@ ALLOWED_HOSTS = []
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',    #красивое представление в браузере
+    ],
+    # пагинация
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2,
+    #jwt
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.TokenAuthentication',
+        # JWT
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # посессиям
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
 # Application definition
@@ -44,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'rest_framework',
+    'rest_framework_simplejwt',
     "debug_toolbar",
 ]
 
@@ -134,3 +151,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+MEDIA_URL = "/media/"
+MEDIA_ROOT = Path(BASE_DIR, 'media')
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=30),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Адрес SMTP сервера
+EMAIL_PORT = 587  # Порт SMTP сервера
+EMAIL_USE_TLS = True  # Использовать TLS
+EMAIL_HOST_USER = 'ulya-gonch15@yandex.ru'  # Ваш адрес электронной почты
+EMAIL_HOST_PASSWORD = '8784858689u'  # Ваш пароль от электронной почты

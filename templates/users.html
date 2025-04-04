@@ -1,32 +1,118 @@
 
 <!DOCTYPE html>
+{% load static %}
 <html>
     <head>
-        <style>
-            h4 {display: inline;}
-        </style>
-        <title>Список пользователей</title>
+        <link href="{%static 'css/users.css'%}" rel="stylesheet">
     </head>
     <body>
-        <h1>Список пользователей</h1>
-        <div class="row" style="inline">
-            {% if user_fields %}
-                {% for field in user_fields %}
-                    <h4>{{ field }}</h4>
-                {% endfor %}
-        </div>
-
-        {% for user in users %}
-            <div class="user" style="inline">
-                <h4>{{ user.name }}</h4>
-                <h4>{{ user.surname }}</h4>
-                <h4>{{ user.age }}</h4>
+        <header>
+            <div class='title'>Список пользователей</div>
+        </header>
+        <nav>
+            <div><a href="{% url 'home' %}">Главная</a></div>
+            <div>{{user.username}}</div>
+            <div><a href="{% url 'user_add' %}">Добавить пользователя</a></div>
+            <div><a href="/logout/">Выход</a></div>
+        </nav>
+        <section>
+            <form method="get">
+                <input type="hidden" name="search" value="{{ request.GET.search }}">
+                <input type="hidden" name="course" value="{{ request.GET.course }}">
+                <div class="yes"><input type="text" name="search" placeholder="Поиск по имени/фамилии"></div>
+                <div class="yes">
+                    <label for="course">Поиск по курсу:</label>
+                    <select name="course" id="course">
+                        <option value="">Все курсы</option>
+                        {% for course in courses %}
+                            <option value="{{ course.id }}">
+                                {{ course }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="yes">
+                    <label for="sort">Сортировать по:</label>
+                    <select name="sort" id="sort">
+                        <option value="name">
+                            {% if sort_by is "name" %}
+                                selected
+                            {% endif %}
+                           Имя (Я-А)
+                        </option>
+                        <option value="-name">
+                            {% if sort_by is "-name" %}
+                                selected
+                            {% endif %}
+                           Имя (A-Я)
+                        </option>
+                        <option value="surname">
+                            {% if sort_by is "surname" %}
+                                selected
+                            {% endif %}
+                           Фамилия (A-Я)
+                        </option>
+                        <option value="-surname">
+                            {% if sort_by is "-surname" %}
+                                selected
+                            {% endif %}
+                           Фамилия (A-Я)
+                        </option>
+                        <option value="age">
+                            {% if sort_by is "age" %}
+                                selected
+                            {% endif %}
+                           Возраст (по возрастанию)
+                        </option>
+                        <option value="-age">
+                            {% if sort_by is "-age" %}
+                                selected
+                            {% endif %}
+                           Возраст (по убыванию)
+                       </option>
+                    </select>
+                </div>
+                <div class="yes">
+                    <button type="submit">
+                        Поиск
+                    </button>
+                </div>
+            </form>
+            <div class="schedule-container">
+                <div class="schedule-header">
+                    <div class="time">фото</div>
+                    <div class="time">имя</div>
+                    <div class="time">фамилия</div>
+                    <div class="time">возраст</div>
+                    <div class="time">курсы</div>
+                </div>
+                <div class="schedule-body">
+                    {% for user in users %}
+                        <a href="{{user.detail_url}}" class="link-div">
+                        <div class="event-cell">
+                            <div class="event">
+                                {% if user.image %}
+                                    <img src="/media/{{user.image}}" width="40" height="40">
+                                {% else %}
+                                    <img src="/media/photos/user.png" width="40" height="40">
+                                {% endif %}
+                            </div>
+                            <div class="event">{{ user.name }} </div>
+                            <div class="event">{{ user.surname }} </div>
+                            <div class="event">{{ user.age }} </div>
+                            <div class="event courses">
+                                {% if user.course.all %}
+                                    {% for course in user.course.all %}
+                                        {{ course }}<br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        </a>
+                    {% endfor %}
+                </div>
             </div>
-        {% endfor %}
-
-        {% else %}
-            <p>Пользователей не найдено.</p>
-        {% endif %}
+        </section>
 
     </body>
 </html>
