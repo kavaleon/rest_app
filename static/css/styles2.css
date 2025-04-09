@@ -1,0 +1,188 @@
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    width: 100vw;
+    padding: 0px;
+    margin: 0px;
+    background-image: url(../img/fon_log_reg.jpg);
+    background-size: cover;
+    position: relative;
+    font-family: "Abril Fatface", "Courier New", monospace;
+    display: inline-grid;
+    align-content: center;
+    justify-items: center;
+    align-items: start;
+}
+
+header{
+    position: fixed;
+    background: linear-gradient(45deg, #1f47216b, #0c2c0a82);
+    width: 100%;
+    height: 10%;
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+nav{
+    background: #000000ab;
+    width: 100%;
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.small-nav {
+    width: 100%;
+    align-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.home{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+}
+
+nav > .nav-item{
+
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.small-nav > .nav-item{
+    padding: 10px;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+section{
+    height: 90%;
+    width: 90%;
+    text-align: center;
+    background: #043a09b0;
+    border: 5px #000000b0 solid;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 700px;
+    justify-content: space-around;
+}
+
+article{
+    background: #000d05;
+    color: white;
+    width: 95%;
+    text-align: center;
+}
+
+a {
+    color: white;
+    text-decoration: blink;
+}
+.schedule-container {
+    font-size: 22px;
+    display: grid;
+    grid-template-columns: 1fr;
+    color: #07b249;
+    font-weight: bold;
+    justify-items: stretch;
+}
+
+.schedule-header {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+    align-content: center;
+}
+
+.schedule-header div {
+    padding: 10px;
+    text-align: center;
+}
+
+.schedule-body {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: inherit;
+}
+
+.schedule-body .day-header {
+    padding: 10px;
+    text-align: center;
+    align-self: center;
+}
+
+.schedule-body .event-cell {
+    display: grid;
+    padding: 10px;
+    min-height: 60px;
+    text-align: center;
+    word-wrap: break-word;
+    background-color: #083f07c2;
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+    color: #011f06;
+    border-radius: 20px;
+    position: relative;
+    margin: 2px;
+}
+.event{
+    align-content: center;
+    background: #71fbab4f;
+}
+input{
+    width: 35px;
+    height: 35px;
+}
+table{
+    font-size: 20px;
+    text-align: center;
+    place-self: center;
+}
+td{
+    padding: 4px;
+}
+button {
+    padding: 10px;
+    background: #00801357;
+    color: white;
+    border: 1px solid black;
+    margin: 10px;
+}
+
+
+.user {
+    padding: 100px;
+    font-size: 30px;
+}
+.user-info{
+color: green;
+}
+.courses {
+    padding-left: 50px;
+    font-size: 20px;
+}
